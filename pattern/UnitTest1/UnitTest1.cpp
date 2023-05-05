@@ -134,20 +134,45 @@ namespace UnitTest1
 
 		TEST_METHOD(TestConstructorVariable) {
 			Variable* variable = new Variable("variable");
-			Assert::IsTrue(variable->name() == "vaiable");
+			Assert::IsTrue(variable->name() == "variable");
 		}
 
 		TEST_METHOD(TestEvaluateVariable) {
 			Variable* variable = new Variable("variable");
 			Assert::IsTrue(variable->evaluate() == 0.0);
 		}
-		TEST_METHOD(TestConstructorFunctionCallAbs) {
-			srand(time(NULL));
-			Number* number = new Number(static_cast <double> (rand()));
-			FunctionCall* callSqrt = new FunctionCall("abs", number);
-			Assert::IsTrue(callSqrt->arg() == number && callSqrt->name() == "abs");
+	};
+	TEST_CLASS(TestStructureCopySyntaxTree)
+	{
+	public:
 
+		TEST_METHOD(TestConstructorVariable) {
+			Variable* variable = new Variable("variable");
+			Assert::IsTrue(variable->name() == "variable");
 		}
 
+		TEST_METHOD(TestEvaluateVariable) {
+			Variable* variable = new Variable("variable");
+			Assert::IsTrue(variable->evaluate() == 0.0);
+		}
+
+		TEST_METHOD(TestCopyNumber)
+		{
+			CopySyntaxTree tree_copy;
+			Number num(32.0);
+			Expression* exp = num.transform(&tree_copy);
+			Number* result = dynamic_cast<Number*>(exp);
+			Assert::IsNotNull(result);
+			Assert::AreEqual(32.0, result->value());
+		}
+		TEST_METHOD(TestCopyVariable)
+		{
+			CopySyntaxTree tree_copy;
+			Variable var("y");
+			Expression* exp = var.transform(&tree_copy);
+			Variable* result = dynamic_cast<Variable*>(exp);
+			Assert::IsNotNull(result);
+			Assert::AreEqual(std::string("y"), result->name());
+		}
 	};
 }

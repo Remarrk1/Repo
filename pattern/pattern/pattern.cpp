@@ -22,7 +22,6 @@ struct Transformer//pattern Visitor
 	virtual Expression* transformFunctionCall(FunctionCall const*) = 0;
 	virtual Expression* transformVariable(Variable const*) = 0;
 };
-
 struct Number : Expression // стуктура «Число»
 {
 	Number(double value) : value_(value) {} //конструктор

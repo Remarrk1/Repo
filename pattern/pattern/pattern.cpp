@@ -1,6 +1,4 @@
 ﻿using namespace std;
-#include <iostream>
-#include <cassert>
 #include <string> 
 struct Transformer;
 struct Number;
